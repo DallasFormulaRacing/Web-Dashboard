@@ -62,7 +62,7 @@ test_graph = dmc.Card(
     Input("session-id-filter", 'value'),
     Input("offline-data", "data")
 )
-def tps_over_time_graph(value, data):
+def tps_over_time_graph_file_upload(value, data):
     # todo: fix data being of type None
     if value == None:
         return px.line(title="No Data", labels={"value": "Linpot", "timestamp": "Time"})
@@ -70,8 +70,6 @@ def tps_over_time_graph(value, data):
     print("read df: ", df)
     if df.empty:
         return px.line(title="No Data", labels={"value": "Linpot", "timestamp": "Time"})
-    print(len(data))
-    #print(pd.read_json(data[len(data)-1], orient='split'))
     fig = px.line(
         df,
         x="timestamp",

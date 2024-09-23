@@ -32,8 +32,6 @@ def load_data(_offline_data, session_id):
     try: 
         db = get_db()
     except: 
-        print('here')
-        print(session_id)
         return _offline_data[int(session_id)] if session_id != None else []
     collection = db["realtime_metrics"]
     # Query MongoDB for data with the given run ID

@@ -36,8 +36,7 @@ upload = dmc.Card([
             'textAlign': 'center',
         },
         multiple=True
-    ),
-    html.Div(id='offline-data')
+    )
 ])
 
 
@@ -57,7 +56,6 @@ def update_offline_status(_offline_data):
 
 @callback(Output("session-id-current", "data"), State("session-id-current", "data"), Input("offline-data", "data"))
 def update_offline_sessions_count(_session_id_current, _offline_data):
-    #print(_offline_data)
     return _session_id_current + 1
 
 
@@ -65,14 +63,6 @@ def update_offline_sessions_count(_session_id_current, _offline_data):
 def update_offline_sessions(_session_id_offline, _session_data):
     # prevents cyclic dependencies
     _session_id_offline.append(_session_id_offline[len(_session_id_offline) -1 ]+1)
-    #lengthDataframeList = 0 
-    #if _session_data != None:
-    #    lengthDataframeList = (len(_session_data) -1 )
-    #if _session_id_offline == None:
-    #    _session_id_offline = [-1]
-
-    #_session_id_offline = _session_id_offline.append([range(_session_id_offline[len(_session_id_offline) -1 ], lengthDataframeList )])
-    #print(_session_id_offline)
 
     return _session_id_offline
 
@@ -80,15 +70,12 @@ def update_offline_sessions(_session_id_offline, _session_data):
 @callback(Output('offline-data', 'data'), State('offline-data', 'data'),
               Input('csv-file-upload', 'contents'))
 def update_output(_offline_data, list_of_contents):
-    #print('data')
-    #print(_offline_data)
 
     if list_of_contents is not None:
         children = [
             parse_contents(c).to_json(date_format="iso", orient="split") for c in
             list_of_contents]
-        #print('data')
-        #print(children)
+        
         if _offline_data != None:
             children = children + _offline_data
 

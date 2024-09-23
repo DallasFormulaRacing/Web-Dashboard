@@ -23,8 +23,8 @@ def SessionIdFilter():
 def update_session_id(value):
     return value
 
-@callback(Output("session-id-filter", "data"), Input("session-id-offline", "data"))
-def update_session_id_values(data):
+@callback(Output("session-id-filter", "data"),  Input("session-id-offline", "data"),  Input("url", "href"))
+def update_session_id_values(data, _url):
     try:
         db = get_db()
         collection = db["realtime_metrics"]
