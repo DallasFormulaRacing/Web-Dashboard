@@ -1,4 +1,4 @@
-FROM python:3.7.1
+FROM python:3.11.9
 
 WORKDIR /code
 
@@ -9,8 +9,6 @@ RUN pip install --upgrade pip
 RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
 # todo: Fix problem with werkzeug version 
-RUN pip uninstall --yes werkzeug
-RUN pip install -v https://github.com/pallets/werkzeug/archive/refs/tags/2.0.3.tar.gz
-COPY ./app.py /code
+COPY . .
 
 CMD ["python", "app.py"]
